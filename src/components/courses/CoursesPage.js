@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createCourse } from "../../redux/actions/courseActions";
 
-export default class CoursesPage extends React.Component {
+class CoursesPage extends React.Component {
   state = {
     course: {
       title: "",
@@ -14,7 +16,7 @@ export default class CoursesPage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    alert(this.state.course.title);
+    this.props.dispatch(createCourse(this.state.course));
   };
 
   render() {
@@ -32,3 +34,11 @@ export default class CoursesPage extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    courses: state.courses,
+  };
+}
+
+export default connect(mapStateToProps)(CoursesPage);
