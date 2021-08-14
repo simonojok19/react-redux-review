@@ -1,10 +1,15 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import HomePage from "./components/about/HomePage";
+import AboutPage from "./components/home/AboutPage";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <h1>Hello World</h1>
+      <div className="container-fluid">
+        <Route exact path="/" component={HomePage} />
+        <Route path="/about" component={AboutPage} />
+      </div>
     </BrowserRouter>
   );
 }
