@@ -1,8 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
+import App from "./src/App";
 
-function Hi() {
-  return <p>Hi.</p>;
-}
-
-render(<Hi />, document.getElementById("app"));
+render(<App />, document.getElementById("app"));
