@@ -3,5 +3,5 @@ export const COURSE_ACTION = {
 };
 
 export function createCourse(course) {
-  return { type: COURSE_ACTION.CREATE_COURSE, course: course };
+  return { type: COURSE_ACTION.CREATE_COURSE, course };
 }
