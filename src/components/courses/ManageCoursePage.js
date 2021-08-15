@@ -71,11 +71,17 @@ ManageCoursePage.proptypes = {
   history: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
+  const slug = props.match.params.slug;
+
+  const course = slug
+    ? state.courses.find((course) => course.slug === slug) || null
+    : newCourse;
+
   return {
     courses: state.courses,
     authors: state.authors,
-    course: newCourse,
+    course,
   };
 }
 
