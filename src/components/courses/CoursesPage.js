@@ -9,13 +9,17 @@ import CourseList from "./CourseList";
 class CoursesPage extends React.Component {
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
-    this.props.actions.loadCourses().catch((error) => {
-      alert("Loading courses failed " + error);
-    });
+    if (this.props.courses.length === 0) {
+      this.props.actions.loadCourses().catch((error) => {
+        alert("Loading courses failed " + error);
+      });
+    }
 
-    this.props.actions.loadAuthors().catch((error) => {
-      alert("Loading authors failed " + error);
-    });
+    if (this.props.authors.length === 0) {
+      this.props.actions.loadAuthors().catch((error) => {
+        alert("Loading authors failed " + error);
+      });
+    }
   }
 
   render() {
@@ -29,8 +33,11 @@ class CoursesPage extends React.Component {
 }
 
 CoursesPage.proptypes = {
-  createCourse: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
+  authors: PropTypes.array.isRequired,
+  courses: PropTypes.array.isRequired,
+  loadAuthors: PropTypes.func.isRequired,
+  loadCourses: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -44,9 +51,9 @@ function mapStateToProps(state) {
               authorName: state.authors.find(
                 (author) => author.id === course.authorId
               ).name,
-              authors: state.authors,
             };
           }),
+    authors: state.authors,
   };
 }
 
