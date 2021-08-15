@@ -5,30 +5,25 @@ import { loadCourses } from "../../redux/actions/courseActions";
 import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 
-class ManageCoursePage extends React.Component {
-  componentDidMount() {
-    const { loadAuthors, loadCourses, courses, authors } = this.props;
-    if (courses.length === 0) {
-      loadCourses().catch((error) => {
-        alert("Loading courses failed " + error);
-      });
-    }
-
-    if (authors.length === 0) {
-      loadAuthors().catch((error) => {
-        alert("Loading authors failed " + error);
-      });
-    }
+const ManageCoursePage = ({ loadAuthors, loadCourses, courses, authors }) => {
+  if (courses.length === 0) {
+    loadCourses().catch((error) => {
+      alert("Loading courses failed " + error);
+    });
   }
 
-  render() {
-    return (
-      <>
-        <h2>Manage Course</h2>
-      </>
-    );
+  if (authors.length === 0) {
+    loadAuthors().catch((error) => {
+      alert("Loading authors failed " + error);
+    });
   }
-}
+
+  return (
+    <>
+      <h2>Manage Course</h2>
+    </>
+  );
+};
 
 ManageCoursePage.proptypes = {
   authors: PropTypes.array.isRequired,
