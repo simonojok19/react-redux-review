@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { connect } from "react-redux";
-import * as courseActions from "../../redux/actions/courseActions";
-import * as authorAction from "../../redux/actions/authorActions";
+import { loadCourses } from "../../redux/actions/courseActions";
+import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 
 class ManageCoursePage extends React.Component {
@@ -39,14 +39,14 @@ ManageCoursePage.proptypes = {
 
 function mapStateToProps(state) {
   return {
-    courses: state.constructor,
+    courses: state.courses,
     authors: state.authors,
   };
 }
 
 const mapDispatchToProps = {
-  loadCourses: courseActions.loadCourses,
-  loadAuthors: authorAction.loadAuthors,
+  loadCourses,
+  loadAuthors,
 };
 
 // const mapDispatchToProps = {
