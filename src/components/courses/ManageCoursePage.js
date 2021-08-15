@@ -24,6 +24,8 @@ const ManageCoursePage = ({
       loadCourses().catch((error) => {
         alert("Loading courses failed " + error);
       });
+    } else {
+      setCourse(initialCourse);
     }
 
     if (authors.length === 0) {
@@ -31,7 +33,7 @@ const ManageCoursePage = ({
         alert("Loading authors failed " + error);
       });
     }
-  }, []);
+  }, [initialCourse]);
 
   function handleChange(event) {
     const { name, value } = event.target;
