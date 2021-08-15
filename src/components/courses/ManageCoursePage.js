@@ -74,9 +74,10 @@ ManageCoursePage.proptypes = {
 function mapStateToProps(state, props) {
   const slug = props.match.params.slug;
 
-  const course = slug
-    ? state.courses.find((course) => course.slug === slug) || null
-    : newCourse;
+  const course =
+    slug && state.courses.length > 0
+      ? state.courses.find((course) => course.slug === slug) || null
+      : newCourse;
 
   return {
     courses: state.courses,
