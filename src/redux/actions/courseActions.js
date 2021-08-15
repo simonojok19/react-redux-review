@@ -1,7 +1,8 @@
-import * as authorApi from "../../api/authorApi";
+import * as courseApi from "../../api/courseApi";
+import { LOAD_COURSES_SUCCESS } from "./actionTypes";
 
-export function loadAuthorsSuccess(authors) {
-  return { type: LOAD_AUTHORS_SUCCESS, authors };
+export function loadCoursesSuccess(courses) {
+  return { type: LOAD_COURSES_SUCCESS, courses };
 }
 
 export function loadCourses() {
@@ -9,7 +10,7 @@ export function loadCourses() {
     return courseApi
       .getCourses()
       .then((courses) => {
-        dispatch(loadAuthorsSuccess(courses));
+        dispatch(loadCoursesSuccess(courses));
       })
       .catch((error) => {
         throw error;
