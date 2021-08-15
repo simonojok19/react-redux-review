@@ -31,12 +31,22 @@ const ManageCoursePage = ({
     }
   }, []);
 
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setCourse((prevState) => {
+      return {
+        ...prevState,
+        [name]: name === "authorId" ? parseInt(value, 10) : value,
+      };
+    });
+  }
+
   return (
     <CourseForm
       course={course}
       errors={errors}
       authors={authors}
-      onChange={() => {}}
+      onChange={handleChange}
       onSave={() => {}}
     />
   );
