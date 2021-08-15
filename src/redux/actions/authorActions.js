@@ -5,7 +5,7 @@ export function loadAuthorsSuccess(authors) {
   return { type: LOAD_AUTHORS_SUCCESS, authors };
 }
 
-export function loadCourses() {
+export function loadAuthors() {
   return (dispatch) => {
     return authorApi
       .getAuthors()

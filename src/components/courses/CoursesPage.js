@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as createCourseAction from "../../redux/actions/courseActions";
+import * as courseActions from "../../redux/actions/courseActions";
+import * as authorAction from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import CourseList from "./CourseList";
+import { loadCourses } from "../../redux/actions/courseActions";
 
 class CoursesPage extends React.Component {
   componentDidMount() {
@@ -37,7 +39,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // createCourse: (course) => dispatch(createCourseAction(course)),
-    actions: bindActionCreators(createCourseAction, dispatch),
+    actions: {
+      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
+      loadAuthors: bindActionCreators(authorAction.loadAuthors, dispatch),
+    },
   };
 }
 
