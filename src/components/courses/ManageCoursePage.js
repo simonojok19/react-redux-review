@@ -1,22 +1,24 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { loadCourses } from "../../redux/actions/courseActions";
 import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 
 const ManageCoursePage = ({ loadAuthors, loadCourses, courses, authors }) => {
-  if (courses.length === 0) {
-    loadCourses().catch((error) => {
-      alert("Loading courses failed " + error);
-    });
-  }
+  useEffect(() => {
+    if (courses.length === 0) {
+      loadCourses().catch((error) => {
+        alert("Loading courses failed " + error);
+      });
+    }
 
-  if (authors.length === 0) {
-    loadAuthors().catch((error) => {
-      alert("Loading authors failed " + error);
-    });
-  }
+    if (authors.length === 0) {
+      loadAuthors().catch((error) => {
+        alert("Loading authors failed " + error);
+      });
+    }
+  }, []);
 
   return (
     <>
