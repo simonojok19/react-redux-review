@@ -1,11 +1,22 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { loadCourses } from "../../redux/actions/courseActions";
 import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
+import CourseForm from "./CourseForm";
+import { newCourse } from "../../../tools/mockData";
 
-const ManageCoursePage = ({ loadAuthors, loadCourses, courses, authors }) => {
+const ManageCoursePage = ({
+  loadAuthors,
+  loadCourses,
+  courses,
+  authors,
+  course: initialCourse,
+}) => {
+  const [course, setCourse] = useState(initialCourse);
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     if (courses.length === 0) {
       loadCourses().catch((error) => {
@@ -21,9 +32,13 @@ const ManageCoursePage = ({ loadAuthors, loadCourses, courses, authors }) => {
   }, []);
 
   return (
-    <>
-      <h2>Manage Course</h2>
-    </>
+    <CourseForm
+      course={course}
+      errors={errors}
+      authors={authors}
+      onChange={() => {}}
+      onSave={() => {}}
+    />
   );
 };
 
@@ -32,12 +47,14 @@ ManageCoursePage.proptypes = {
   courses: PropTypes.array.isRequired,
   loadAuthors: PropTypes.func.isRequired,
   loadCourses: PropTypes.func.isRequired,
+  course: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     courses: state.courses,
     authors: state.authors,
+    course: newCourse,
   };
 }
 
