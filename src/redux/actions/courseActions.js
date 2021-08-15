@@ -20,6 +20,8 @@ export function loadCourses() {
       .then((courses) => {
         dispatch(loadCoursesSuccess(courses));
       })
-      .catch((error) => throw error);
+      .catch((error) => {
+        throw error;
+      });
   };
 }

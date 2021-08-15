@@ -5,6 +5,13 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 
 class CoursesPage extends React.Component {
+  componentDidMount() {
+    // eslint-disable-next-line react/prop-types
+    this.props.actions.loadCourses().catch((error) => {
+      alert("Loading courses failed " + error);
+    });
+  }
+
   render() {
     return (
       <>
