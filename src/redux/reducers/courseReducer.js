@@ -1,5 +1,6 @@
 import {
   CREATE_COURSE_SUCCESS,
+  DELETE_COURSE_OPTIMISTIC,
   LOAD_COURSES_SUCCESS,
   UPDATE_COURSE_SUCCESS,
 } from "../actions/actionTypes";
@@ -17,6 +18,9 @@ export default function courseReducer(state = initialState.courses, action) {
       return state.map((course) =>
         course.id === action.course.id ? action.course : course
       );
+    }
+    case DELETE_COURSE_OPTIMISTIC: {
+      return state.filter((course) => course.id !== action.course.id);
     }
     default: {
       return state;
