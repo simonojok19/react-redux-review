@@ -5,13 +5,16 @@ import * as authorAction from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import CourseList from "./CourseList";
-import { loadCourses } from "../../redux/actions/courseActions";
 
 class CoursesPage extends React.Component {
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
     this.props.actions.loadCourses().catch((error) => {
       alert("Loading courses failed " + error);
+    });
+
+    this.props.actions.loadAuthors().catch((error) => {
+      alert("Loading authors failed " + error);
     });
   }
 
@@ -32,7 +35,18 @@ CoursesPage.proptypes = {
 
 function mapStateToProps(state) {
   return {
-    courses: state.courses,
+    courses:
+      state.authors.length === 0
+        ? []
+        : state.courses.map((course) => {
+            return {
+              ...course,
+              authorName: state.authors.find(
+                (author) => author.id === course.authorId
+              ).name,
+              authors: state.authors,
+            };
+          }),
   };
 }
 
