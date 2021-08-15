@@ -1,9 +1,9 @@
 import initialState from "./initialState";
-import { BEGIN_API_CALL } from "../actions/actionTypes";
+import { API_CALL_ERROR, BEGIN_API_CALL } from "../actions/actionTypes";
 
-// function actionTypeEndsInSuccess(type) {
-//   return type.substring(type.length - 8) === "_SUCCESS";
-// }
+function actionTypeEndsInSuccess(type) {
+  return type.substring(type.length - 8) === "_SUCCESS";
+}
 
 export default function apiStatusReducer(
   state = initialState.apiCallsInProgress,
@@ -11,7 +11,10 @@ export default function apiStatusReducer(
 ) {
   if (action.type === BEGIN_API_CALL) {
     return state + 1;
-  } else if (action.type.substring(action.type.length - 8) === "_SUCCESS") {
+  } else if (
+    action.type === API_CALL_ERROR ||
+    actionTypeEndsInSuccess(action.type)
+  ) {
     return state - 1;
   }
   return state;

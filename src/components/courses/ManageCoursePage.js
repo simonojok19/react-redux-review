@@ -51,10 +51,15 @@ const ManageCoursePage = ({
   function handleSave(event) {
     setSaving(true);
     event.preventDefault();
-    saveCourse(course).then(() => {
-      toast.success("Course Saved");
-      history.push("/courses");
-    });
+    saveCourse(course)
+      .then(() => {
+        toast.success("Course Saved");
+        history.push("/courses");
+      })
+      .catch((error) => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
 
   return (
