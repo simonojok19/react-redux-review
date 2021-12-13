@@ -26,6 +26,10 @@ it('renders form and header', () => {
 
 it("Labels save buttons as 'Save' when not saving", () => {
     const wrapper = renderCourseForm()
-    console.log(wrapper.debug())
     expect(wrapper.find("button").text()).toBe("Save")
+})
+
+it("Labels save button as 'Saving...' when saving", () => {
+    const wrapper = renderCourseForm({ saving: true })
+    expect(wrapper.find("button").text()).toBe("Saving...")
 })
